@@ -10,9 +10,11 @@ namespace Courses.GraphQL.GraphQL.Types
             Field(x => x.Id, type: typeof(IdGraphType)).Description("Id property from the Course Object");
             Field(x => x.Name, type: typeof(StringGraphType)).Description("Name property from the Course Object");
             Field(x => x.Description, type: typeof(StringGraphType)).Description("Description property from the Course Object");
-            Field(x => x.Review, type: typeof(IntGraphType)).Description("Review property from the Course Object");
             Field(x => x.DateAdded, type: typeof(DateTimeGraphType)).Description("DateAdded property from the Course Object");
             Field(x => x.DateUpdated, type: typeof(DateTimeGraphType)).Description("DateUpdated property from the Course Object");
+
+            // One-To-Many
+            Field(x => x.Reviews, type: typeof(ListGraphType<ReviewType>)).Description("List of reviews property from the Course Object");
         }
     }
 }

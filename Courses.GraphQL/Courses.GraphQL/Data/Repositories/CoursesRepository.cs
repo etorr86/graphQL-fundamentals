@@ -1,4 +1,5 @@
 ﻿using Courses.GraphQL.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,16 @@ namespace Courses.GraphQL.Data.Repositories
        
         public List<Course> GetAllCourses()
         {
-            return _context.Courses.ToList();
+            return _context.Courses
+                .Include(co => co.Reviews)
+                .ToList();
         }
 
         public Course GetCourseById(int id)
         {
-            return _context.Courses.FirstOrDefault(n => n.Id == id);
+            return _context.Courses
+                .Include(co => co.Reviews)
+                .FirstOrDefault(n => n.Id == id);
         }
         public Course AddCourse(Course course)
         {
@@ -35,7 +40,7 @@ namespace Courses.GraphQL.Data.Repositories
             var _course = _context.Courses.FirstOrDefault(n => n.Id == id);
             _course.Name = course.Name;
             _course.Description = course.Description;
-            _course.Review = course.Review;
+            _course.Reviews = course.Reviews;
             _course.DateUpdated = DateTime.Now;
             _context.SaveChanges();
 
