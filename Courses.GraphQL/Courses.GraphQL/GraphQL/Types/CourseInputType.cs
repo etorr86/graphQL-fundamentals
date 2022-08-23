@@ -12,9 +12,10 @@ namespace Courses.GraphQL.GraphQL.Mutations
             Field<IdGraphType>("Id");
             Field<StringGraphType>("Name");
             Field<StringGraphType>("Description");
-            Field<IntGraphType>("Review");
             Field<DateTimeGraphType>("DateAdded");
             Field<DateTimeGraphType>("DateUpdated");
+
+            Field<ListGraphType<ReviewInputType>>("Reviews");
         }
     }
 }
